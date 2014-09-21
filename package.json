@@ -10,7 +10,7 @@
     "node": ">=0.10.0"
   },
   "bin": {
-    "default": "cli.js"
+    "jlint": "cli.js"
   },
   "files": [
     "index.js",
