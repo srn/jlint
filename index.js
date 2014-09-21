@@ -10,6 +10,13 @@ module.exports = function(callback){
   };
 
   copypaste.paste(function (err, content) {
+    if (err) {
+      console.log(err);
+
+      lint.parsed = false
+      callback(lint);
+    }
+
     try {
       lint.parsed = true;
       lint.content = JSON.stringify(JSON.parse(content), null, 2);
