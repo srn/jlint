@@ -1,0 +1,46 @@
+{
+  "name": "jlint",
+  "version": "0.0.1",
+  "description": "CLI that parses the current JSON you have in your current clipboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "bin": {
+    "default": "cli.js"
+  },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/srn/jlint"
+  },
+  "keywords": [
+    "jlint",
+    "json",
+    "lint",
+    "jsonlint",
+    "cli",
+    "terminal",
+    "prettify",
+    "copy",
+    "paste"
+  ],
+  "author": "Søren Brokær <root@srn.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srn/jlint/issues"
+  },
+  "homepage": "https://github.com/srn/jlint",
+  "dependencies": {
+    "copy-paste": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  }
+}
