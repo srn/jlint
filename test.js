@@ -15,9 +15,7 @@ describe('jlint', function(){
   describe('parses', function () {
     before(function (done) {
       copypaste.copy(fixtures.parses, function (copy) {
-        copypaste.paste(function (err, content) {
-          done();
-        });
+        done();
       });
     });
 
@@ -35,9 +33,7 @@ describe('jlint', function(){
   describe('fails', function () {
     before(function (done) {
       copypaste.copy(fixtures.fails, function (copy) {
-        copypaste.paste(function (err, content) {
-          done();
-        });
+        done();
       });
     });
 
