@@ -29,12 +29,18 @@ if (argv.indexOf('--version') !== -1) {
   return;
 }
 
+function outputJson (content) {
+  if (argv.indexOf('--silent') === -1) {
+    console.log(content);
+  }
+}
+
 jlint(function (lint) {
   if (lint.parsed) {
     console.log(symbols.success);
-    console.log(lint.content);
+    outputJson(lint.content);
   } else {
     console.log(symbols.error, lint.exception);
-    console.log(lint.content);
+    outputJson(lint.content);
   }
 });
