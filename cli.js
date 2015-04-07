@@ -37,10 +37,10 @@ function outputJson (content) {
 
 jlint(function (lint) {
   if (lint.parsed) {
+    outputJson(lint.content);
     console.log(symbols.success);
-    outputJson(lint.content);
   } else {
-    console.log(symbols.error, lint.exception);
     outputJson(lint.content);
+    console.log(symbols.error, lint.exception);
   }
 });
