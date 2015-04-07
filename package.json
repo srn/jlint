@@ -39,7 +39,7 @@
   "homepage": "https://github.com/srn/jlint",
   "dependencies": {
     "copy-paste": "1.0.2",
-    "log-symbols": "1.0.0"
+    "log-symbols": "1.0.2"
   },
   "devDependencies": {
     "mocha": "2.2.1"
