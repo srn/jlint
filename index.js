@@ -13,7 +13,7 @@ module.exports = function(callback){
     if (err) {
       console.log(err);
 
-      lint.parsed = false
+      lint.parsed = false;
       callback(lint);
     }
 
@@ -28,4 +28,4 @@ module.exports = function(callback){
 
     callback(lint);
   });
-}
+};
