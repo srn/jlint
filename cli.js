@@ -6,6 +6,7 @@ var jlint = require('./');
 var argv = process.argv.slice(2);
 
 var symbols = require("log-symbols");
+var cardinal = require('cardinal');
 
 function help() {
   console.log([
@@ -31,7 +32,7 @@ if (argv.indexOf('--version') !== -1) {
 
 function outputJson (content) {
   if (argv.indexOf('--silent') === -1) {
-    console.log(content);
+    console.log(cardinal.highlight(content, {json: true}));
   }
 }
 
