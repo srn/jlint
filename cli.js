@@ -30,18 +30,22 @@ if (argv.indexOf('--version') !== -1) {
   return;
 }
 
-function outputJson (content) {
+function outputJson (lint) {
   if (argv.indexOf('--silent') === -1) {
-    console.log(cardinal.highlight(content, {json: true}));
+    if (lint.parsed) {
+      console.log(cardinal.highlight(lint.content, {json: true}));
+    } else {
+      console.log(lint.content);
+    }
   }
 }
 
 jlint(function (lint) {
+  outputJson(lint);
+
   if (lint.parsed) {
-    outputJson(lint.content);
     console.log(symbols.success);
   } else {
-    outputJson(lint.content);
     console.log(symbols.error, lint.exception);
   }
 });
