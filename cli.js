@@ -38,6 +38,8 @@ function outputJson (lint) {
       console.log(lint.content);
     }
   }
+
+  process.exit(0);
 }
 
 jlint(function (lint) {

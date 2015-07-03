@@ -40,9 +40,11 @@
   "dependencies": {
     "cardinal": "0.5.0",
     "copy-paste": "1.1.2",
+    "es6-promise": "2.3.0",
     "log-symbols": "1.0.2"
   },
   "devDependencies": {
-    "mocha": "2.2.5"
+    "mocha": "2.2.5",
+    "mock-stdin": "0.3.0"
   }
 }
