@@ -1,7 +1,7 @@
 # jlint [![Build Status](http://img.shields.io/travis/srn/jlint.svg?style=flat-square)](https://travis-ci.org/srn/jlint) [![Dependency Status](http://img.shields.io/gemnasium/srn/jlint.svg?style=flat-square)](https://gemnasium.com/srn/jlint)
 
 
-> CLI that parses the current JSON you have in your current clipboard.
+> CLI that parses the JSON you have in your current clipboard
 
 ## Install
 
@@ -24,7 +24,7 @@ $ jlint --help
     }
 ```
 
-Piping:
+Or:
 
 ```sh
 $ cat log.json | jlint
