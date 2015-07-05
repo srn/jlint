@@ -38,8 +38,6 @@ function outputJson (lint) {
       console.log(lint.content);
     }
   }
-
-  process.exit(0);
 }
 
 jlint(function (lint) {
@@ -50,4 +48,6 @@ jlint(function (lint) {
   } else {
     console.log(symbols.error, lint.exception);
   }
+
+  process.exit(0);
 });

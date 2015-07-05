@@ -11,8 +11,8 @@ var lint = {
 
 var parse = function (content) {
   try {
-    lint.content = JSON.stringify(JSON.parse(content), null, 2);
     lint.parsed = true;
+    lint.content = JSON.stringify(JSON.parse(content), null, 2);
   } catch(ex) {
     lint.content = content;
     lint.parsed = false;
