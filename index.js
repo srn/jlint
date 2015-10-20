@@ -2,7 +2,6 @@
 
 const parseJson = require('parse-json');
 const copypaste = require('copy-paste');
-const cardinal = require('cardinal');
 
 let parse = (content, cb) => {
   try {
