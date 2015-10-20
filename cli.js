@@ -1,53 +1,39 @@
 #!/usr/bin/env node
 'use strict';
 
-var pkg = require('./package.json');
-var jlint = require('./');
-var argv = process.argv.slice(2);
+const jlint = require('./');
+const meow = require('meow');
 
-var symbols = require("log-symbols");
-var cardinal = require('cardinal');
+const symbols = require('log-symbols');
+const cardinal = require('cardinal');
 
-function help() {
-  console.log([
-    '',
-      '  ' + pkg.description,
-    '',
-    '  Example',
-    '    jlint',
-    '',
-    '    ✔'
-  ].join('\n'));
-}
+const cli = meow(`
+    Usage
+      $ jlint
 
-if (argv.indexOf('--help') !== -1) {
-  help();
-  return;
-}
+    Options
+      -s, --silent   Don't output json
 
-if (argv.indexOf('--version') !== -1) {
-  console.log(pkg.version);
-  return;
-}
-
-function outputJson (lint) {
-  if (argv.indexOf('--silent') === -1) {
-    if (lint.parsed) {
-      console.log(cardinal.highlight(lint.content, {json: true}));
-    } else {
-      console.log(lint.content);
-    }
+    Examples
+      $ jlint --silent
+      ✔
+`, {
+  alias: {
+    s: 'silent'
   }
-}
+});
 
-jlint(function (lint) {
-  outputJson(lint);
+jlint((error, json) => {
+  if (error) {
+    console.log(error.message);
+    console.log(symbols.error);
 
-  if (lint.parsed) {
-    console.log(symbols.success);
-  } else {
-    console.log(symbols.error, lint.exception);
+    return;
   }
 
-  process.exit(0);
+  if (!cli.flags.silent) {
+    console.log(cardinal.highlight(JSON.stringify(json, null, 2), {json: true}));
+  }
+
+  console.log(symbols.success);
 });

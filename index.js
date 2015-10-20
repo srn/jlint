@@ -1,66 +1,51 @@
 'use strict';
 
-var copypaste = require("copy-paste");
-var Promise = require('es6-promise').Promise;
+const parseJson = require('parse-json');
+const copypaste = require('copy-paste');
+const cardinal = require('cardinal');
 
-var lint = {
-  parsed: void 0,
-  content: void 0,
-  exception: void 0
-};
-
-var parse = function (content) {
+let parse = (content, cb) => {
   try {
-    lint.parsed = true;
-    lint.content = JSON.stringify(JSON.parse(content), null, 2);
-  } catch(ex) {
-    lint.content = content;
-    lint.parsed = false;
-    lint.exception = ex;
-  }
+    let json = parseJson(content);
 
-  return lint;
+    cb(null, json);
+  } catch (e) {
+    cb(e);
+  }
 };
 
-var promise;
+let promise = new Promise((resolve, reject) => {
+  if (process.stdin && !process.stdin.isTTY) {
+    var data = '';
 
-if (process.stdin && !process.stdin.isTTY) {
-  promise = new Promise(function (resolve) {
-    var stdinData = '';
-
-    process.stdin.on('data', function(data) {
-      var chunk = data.toString();
+    process.stdin.on('data', (chunk) => {
+      chunk = chunk.toString();
 
       if (chunk !== null) {
-        stdinData += chunk;
+        data += chunk;
       }
     });
 
-    process.stdin.on('end', function () {
-      resolve(stdinData);
-    });
-  })
-}
-
-module.exports = function(callback){
-  if (process.stdin && !process.stdin.isTTY) {
-    promise.then(function (stdinData) {
-      callback(parse(stdinData));
+    process.stdin.on('error', (err) => {
+      reject(err);
     });
 
-    return;
+    process.stdin.on('end', () => {
+      resolve(data);
+    });
   }
+});
 
-  copypaste.paste(function (err, content) {
-    if (err) {
-      console.log(err);
+module.exports = (callback) => {
+  if (process.stdin && !process.stdin.isTTY) {
+    promise.then((content) => parse(content, callback)).catch(err => callback(err));
+  } else {
+    copypaste.paste((err, content) => {
+      if (err) {
+        throw err;
+      }
 
-      lint.parsed = false;
-      callback(lint);
-    }
-
-    var parsed = parse(content);
-
-    callback(lint, parsed);
-  });
+      parse(content, callback);
+    });
+  }
 };
