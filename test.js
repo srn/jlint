@@ -56,6 +56,26 @@ describe('jlint', () => {
         done();
       });
     });
+
+    it('should not parse', (done) => {
+      delete require.cache[require.resolve('./')];
+
+      var stdin = require('mock-stdin').stdin();
+      var jlint = require('./');
+
+      process.stdin.resume();
+
+      stdin.send(fixtures.fails);
+      stdin.end();
+
+      jlint((err) => {
+        assert(err instanceof Error);
+
+        stdin.restore();
+
+        done();
+      });
+    });
   });
 
 });
