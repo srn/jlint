@@ -46,7 +46,7 @@
     "update-notifier": "0.5.0"
   },
   "devDependencies": {
-    "mocha": "2.2.5",
+    "mocha": "2.3.3",
     "mock-stdin": "0.3.0"
   }
 }
