@@ -1,7 +1,7 @@
 {
   "name": "jlint",
-  "version": "1.1.1",
-  "description": "CLI that parses the current JSON you have in your current clipboard",
+  "version": "1.1.2",
+  "description": "cli that parses the current JSON you have in your current clipboard",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
