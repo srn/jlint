@@ -2,6 +2,8 @@
 
 > cli that parses the JSON you have in your current clipboard
 
+![screenshot](screenshot.png)
+
 ## Install
 
 ```sh
