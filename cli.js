@@ -3,7 +3,7 @@
 
 const jlint = require('./');
 const meow = require('meow');
-
+const updateNotifier = require('update-notifier');
 const symbols = require('log-symbols');
 const cardinal = require('cardinal');
 
@@ -22,6 +22,8 @@ const cli = meow(`
     s: 'silent'
   }
 });
+
+updateNotifier({pkg: cli.pkg}).notify();
 
 jlint((error, json) => {
   if (error) {
