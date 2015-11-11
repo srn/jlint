@@ -67,6 +67,8 @@ module.exports = (opts, callback) => {
 
   if (process.stdin && !process.stdin.isTTY) {
     promise.then((content) => parse(content, callback)).catch(err => callback(err));
+
+    return;
   }
 
   copypaste.paste((err, content) => {
