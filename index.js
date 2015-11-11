@@ -25,13 +25,8 @@ let promise = new Promise((resolve, reject) => {
       }
     });
 
-    process.stdin.on('error', (err) => {
-      reject(err);
-    });
-
-    process.stdin.on('end', () => {
-      resolve(data);
-    });
+    process.stdin.on('error', (err) => reject(err));
+    process.stdin.on('end', () => resolve(data));
   }
 });
 
