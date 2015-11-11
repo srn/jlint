@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const glob = require('glob');
 const parseJson = require('parse-json');
 const copypaste = require('copy-paste');
 
@@ -30,16 +32,48 @@ let promise = new Promise((resolve, reject) => {
   }
 });
 
-module.exports = (callback) => {
-  if (process.stdin && !process.stdin.isTTY) {
-    promise.then((content) => parse(content, callback)).catch(err => callback(err));
-  } else {
-    copypaste.paste((err, content) => {
-      if (err) {
-        throw err;
+let parseFile = (f, cb) => {
+  fs.readFile(f, {encoding: 'utf8'}, (err, content) => {
+    if (err) {
+      return cb(err);
+    }
+
+    parse(content, (er, json) => cb(er, json, f));
+  });
+};
+
+module.exports = (opts, callback) => {
+  if (opts.pattern) {
+    glob(opts.pattern, (error, files) => {
+      if (error) {
+        return callback(error);
       }
 
-      parse(content, callback);
+      if (files === null) {
+        return callback(new Error(`Could not find any files based on ${opts.pattern}`))
+      }
+
+      files.forEach((f) => parseFile(f, callback));
     });
+
+    return;
   }
+
+  if (opts.files && opts.files.length > 0) {
+    opts.files.forEach((f) => parseFile(f, callback));
+
+    return;
+  }
+
+  if (process.stdin && !process.stdin.isTTY) {
+    promise.then((content) => parse(content, callback)).catch(err => callback(err));
+  }
+
+  copypaste.paste((err, content) => {
+    if (err) {
+      throw err;
+    }
+
+    parse(content, callback);
+  });
 };

@@ -15,7 +15,7 @@ describe('jlint', () => {
   describe('copy-paste', () => {
     it('should parse', (done) => {
       copypaste.copy(fixtures.parses, () => {
-        jlint((error, json) => {
+        jlint({}, (error, json) => {
           assert.equal(error, null);
           assert.deepEqual(json, JSON.parse(fixtures.parses));
 
@@ -26,7 +26,7 @@ describe('jlint', () => {
 
     it('should not parse', (done) => {
       copypaste.copy(fixtures.fails, () => {
-        jlint(err => {
+        jlint({}, err => {
           assert(err instanceof Error);
 
           done();
@@ -47,7 +47,7 @@ describe('jlint', () => {
       stdin.send(fixtures.parses);
       stdin.end();
 
-      jlint((error, json) => {
+      jlint({}, (error, json) => {
         assert.equal(error, null);
         assert.deepEqual(json, JSON.parse(fixtures.parses));
 
@@ -68,7 +68,7 @@ describe('jlint', () => {
       stdin.send(fixtures.fails);
       stdin.end();
 
-      jlint((err) => {
+      jlint({}, (err) => {
         assert(err instanceof Error);
 
         stdin.restore();
