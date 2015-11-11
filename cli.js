@@ -12,7 +12,7 @@ const cli = meow(`
       $ jlint
 
     Options
-      -s, --silent   Don't output json
+      -s, --silent   Don't output json, just parse
 
     Examples
       $ jlint --silent

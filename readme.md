@@ -15,14 +15,15 @@ $ npm i -g jlint
 ```sh
 $ jlint --help
 
-  Example
-    jlint
+    Usage
+      $ jlint
 
-    {
-      "hello": 1,
-      "foo": "bar"
-    }
-    ✔︎
+    Options
+      -s, --silent   Don't output json, just parse
+
+    Examples
+      $ jlint --silent
+      ✔
 ```
 
 Piping also works:
