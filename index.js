@@ -49,8 +49,8 @@ module.exports = (opts, callback) => {
         return callback(error);
       }
 
-      if (files === null) {
-        return callback(new Error(`Could not find any files based on ${opts.pattern}`))
+      if (files.length === 0) {
+        return callback(new Error(`Could not find any files based on ${opts.pattern}`));
       }
 
       files.forEach((f) => parseFile(f, callback));
