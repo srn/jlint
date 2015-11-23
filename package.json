@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "istanbul": "0.4.0",
-    "mocha": "2.3.3",
+    "mocha": "2.3.4",
     "mock-stdin": "0.3.0"
   }
 }
